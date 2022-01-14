@@ -4,6 +4,7 @@ const http = require("http")
 const fs = require("fs")
 const url = require("url")
 
+// tomando información de la PokeApi y creando el archivo JSON para su posterior lectura
 let pokeData = [] 
 getPokemones().then((data) => {
     data.forEach(e => {
@@ -48,13 +49,12 @@ http.createServer((req, res) => {
 
     // disponibilizando url "pokemones" para la lectura de JSON
     if (req.url.includes("/pokemones")) {
-        res.writeHead(200, {"content-type" : "text/html"})
-        fs.readFile("poke.json", "utf-8", (err, data) => {
-            res.end(data)
-        })
-    }
-
-    
+            res.writeHead(200, {"content-type" : "text/html"})
+            fs.readFile("poke.json", "utf-8", (err, data) => {
+                res.end(data)
+            })
+            
+    }  
     
 })
 .listen(3000, () => console.log("Servidor levantado en el puerto 3000"))
